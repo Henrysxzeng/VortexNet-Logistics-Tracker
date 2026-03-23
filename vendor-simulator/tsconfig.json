@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // 1. 指定源码所在目录
+    "rootDir": "./src",
+    
+    // 2. 指定编译后的输出目录
+    "outDir": "./build",
+
+    // 3. 模块解析策略
+    "moduleResolution": "node",
+    
+    // 4. 编译目标和模块系统 (适配传统的 Node.js 后端)
+    "module": "CommonJS",
+    "target": "ES2020",
+    
+    // 基础推荐配置 (保留了你原来的一些严格检查)
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
