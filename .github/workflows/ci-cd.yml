@@ -1,0 +1,49 @@
+# .github/workflows/ci-cd.yml
+
+name: VortexNet Microservices CI/CD Pipeline
+
+# 1. 触发条件：当你向 main 分支 push 代码时，机器人自动开工
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 2. 核心任务：构建与测试
+jobs:
+  build-and-test:
+    # 租用一台最新版的 Ubuntu Linux 临时服务器来跑代码
+    runs-on: ubuntu-latest
+
+    steps:
+    # 步骤 1: 把你在 GitHub 上的代码拉取到这台临时服务器上
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+
+    # 步骤 2: 在服务器上安装 Node.js (模拟你的本地环境)
+    - name: ⚙️ Setup Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    # 步骤 3: 自动构建 API 枢纽
+    - name: 🏗️ Build API Gateway
+      run: |
+        cd vendor-api
+        npm ci
+        npx tsc
+        echo "✅ API Gateway built successfully!"
+
+    # 步骤 4: 自动构建前端大屏
+    - name: 🎨 Build Next.js Dashboard
+      run: |
+        cd vendor-ui
+        npm ci
+        npm run build
+        echo "✅ Next.js Dashboard built successfully!"
+
+    # 步骤 5: 模拟部署动作 (现实中这里会写 AWS 的部署命令)
+    - name: 🚀 Deploy to Production
+      run: |
+        echo "Deploying VortexNet microservices to cloud infrastructure..."
+        echo "Deployment Successful! 🎯"

@@ -7,10 +7,13 @@ export interface LocationData {
   driverName: string;
   statusText: string;
   timestamp: string;
+  avatarUrl?: string;
   geo: {
     lat: number;
     long: number;
   };
+  aiRiskScore?: number;
+  aiIsHighRisk?: boolean;
 }
 
 export const useWebSocket = (url: string) => {

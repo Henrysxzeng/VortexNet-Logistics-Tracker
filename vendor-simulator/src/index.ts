@@ -2,7 +2,7 @@ import { LocationLog } from './types';
 import crypto from 'crypto';
 
 const trucks = [
-  { deviceId: 'TRUCK-CA-001', driverName: 'John Doe', lat: 34.0522, long: -118.2437 },
+  { deviceId: 'TRUCK-CA-001', driverName: 'John Doe',avatarUrl: 'https://vortexnet-assets-zanki.s3.us-east-1.amazonaws.com/driver-001.jpg',  lat: 34.0522, long: -118.2437 },
   { deviceId: 'TRUCK-NY-002', driverName: 'Mike Smith', lat: 40.7128, long: -74.0060 },
   { deviceId: 'TRUCK-TX-003', driverName: 'Sarah Connor', lat: 29.7604, long: -95.3698 }
 ];
@@ -41,6 +41,7 @@ const simulateTraffic = () => {
         logId: crypto.randomUUID(),
         driverName: truck.driverName,
         statusText: 'Driving',
+        avatarUrl: truck.avatarUrl,
         timestamp: new Date().toISOString(),
         geo: {
           lat: Number(truck.lat.toFixed(6)),

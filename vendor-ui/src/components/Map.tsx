@@ -40,13 +40,32 @@ const Map = ({ trucks }: MapProps) => {
         >
           {/* 点击卡车图标弹出的详细信息框 */}
           <Popup>
-            <div className="font-sans">
+            <div className="font-sans flex flex-col items-center">
+              {/* 🆕 如果有头像，就渲染出来 */}
+              {truck.avatarUrl && (
+                <img 
+                  src={truck.avatarUrl} 
+                  alt="Driver Avatar" 
+                  className="w-16 h-16 rounded-full border-2 border-teal-500 mb-2 shadow-sm object-cover"
+                />
+              )}
               <div className="font-bold text-lg text-teal-600 mb-1">{truck.deviceId}</div>
               <div className="text-sm text-gray-700">👤 Driver: {truck.driverName}</div>
               <div className="text-sm text-gray-700">🟢 Status: {truck.statusText}</div>
-              <div className="text-xs text-gray-400 mt-2">
-                Lat: {truck.geo.lat.toFixed(4)}, Lng: {truck.geo.long.toFixed(4)}
-              </div>
+              {/* 🧠 新增：渲染 AI 动态评分 */}
+              {truck.aiRiskScore !== undefined && (
+                <div className="mt-2 w-full p-2 bg-slate-50 border border-slate-200 rounded-md text-center">
+                  <div className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">
+                    AI Risk Analysis
+                  </div>
+                  <div className={`text-xl font-black ${truck.aiIsHighRisk ? 'text-red-600 animate-pulse' : 'text-green-500'}`}>
+                    {truck.aiRiskScore} <span className="text-xs text-gray-400 font-normal">/ 100</span>
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    {truck.aiIsHighRisk ? '⚠️ High Risk Warning' : '✅ Safe Driving'}
+                  </div>
+                </div>
+              )}
             </div>
           </Popup>
         </Marker>

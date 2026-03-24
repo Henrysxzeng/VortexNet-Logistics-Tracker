@@ -15,3 +15,13 @@ out/
 Thumbs.db
 *.csv
 rootkey.csv
+
+# Python 虚拟环境
+venv/
+vendor-ml/venv/
+
+# Terraform 临时文件
+.terraform/
+*.tfstate
+*.tfstate.backup
+

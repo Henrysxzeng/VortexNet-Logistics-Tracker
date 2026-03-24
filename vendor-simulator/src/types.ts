@@ -10,5 +10,6 @@ export interface LocationLog {
   driverName: string;
   statusText: string;
   timestamp: string;
+  avatarUrl?: string; // 🆕 新增这个字段，问号代表可选
   geo: Geotag;
 }
